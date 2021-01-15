@@ -3,13 +3,19 @@ const ls = require('./ls.js');
 
 process.stdout.write('prompt > ');
 
-/**
- * if user types in pwd, return pwd.js
- * else if user types in ls return ls.js
- *
- */
-if (pwd()) {
-  pwd();
-} else if (ls()) {
-  ls();
-}
+// if (pwd()) {
+//   pwd();
+// } else if (ls()) {
+//   ls();
+// }
+
+process.stdin.on('data', (data) => {
+  const cmd = data.toString().trim();
+  if (cmd === 'ls') {
+    ls();
+  } else if (cmd === 'pwd') {
+    pwd();
+  } else {
+    throw 'Try again!';
+  }
+});
